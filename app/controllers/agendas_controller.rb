@@ -23,8 +23,14 @@ class AgendasController < ApplicationController
 
 
   def destroy
-    @agenda.destroy
-    redirect_to dashbord_url, notice: I18n.t('views.messages.delete_agenda')
+    if current_user == @agenda.user|| current_user == @agenda.team.owner
+      @agenda.destroy
+      @user = User.pluck(:keep_team_id)
+      AgendaDeleteMailer.delete_agenda_mail(@user, @agenda).deliver
+      redirect_to dashboard_url, notice: I18n.t('views.messages.deleted_agenda')
+    else
+      redirect_to dashboard_url, notice: I18n.t('views.messages.not_authorized')
+    end
   end
 
   private
