@@ -47,6 +47,19 @@ class TeamsController < ApplicationController
     @team = current_user.keep_team_id ? Team.find(current_user.keep_team_id) : current_user.teams.first
   end
 
+  def leadership_change
+    @assign_member = User.find(params[:leader_ship])
+    @team = Team.find(params[:id])
+    # @team = @assign_member.teams
+    if current_user.id == @team.owner_id
+      @team.update_attributes(owner_id: @assign_member.id)
+      @team.save
+      redirect_to @team, notice: I18n.t('views.messages.leadership_change')
+    else
+      redirect_to @team
+    end
+  end
+
   private
 
   def set_team
