@@ -22,6 +22,7 @@ class AssignsController < ApplicationController
   end
 
   private
+  
   def assign_params
     params[:email]
   end
@@ -63,6 +64,6 @@ class AssignsController < ApplicationController
   end
 
   def find_team(team_id)
-    team = Team.friendly.find(params[:team_id])
+    Team.friendly.find(team_id)
   end
 end

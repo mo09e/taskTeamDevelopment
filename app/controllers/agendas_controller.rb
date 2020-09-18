@@ -21,9 +21,8 @@ class AgendasController < ApplicationController
     end
   end
 
-
   def destroy
-    if current_user == @agenda.user|| current_user == @agenda.team.owner
+    if current_user == @agenda.user || current_user == @agenda.team.owner
       @agenda.destroy
       @user = User.pluck(:keep_team_id)
       AgendaDeleteMailer.delete_agenda_mail(@user, @agenda).deliver
