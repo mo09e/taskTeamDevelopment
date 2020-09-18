@@ -54,6 +54,7 @@ class TeamsController < ApplicationController
     if current_user.id == @team.owner_id
       @team.update_attributes(owner_id: @assign_member.id)
       @team.save
+      TeamLeaderChangeMailer.team_leader_change_mail(@team).deliver
       redirect_to @team, notice: I18n.t('views.messages.leadership_change')
     else
       redirect_to @team

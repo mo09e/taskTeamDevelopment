@@ -254,6 +254,7 @@ ja:
       team_you_belong_to: '所属しているチーム'
       posted_articles: '投稿した記事一覧'
       leadership_change: '権限を移動しました'
+      leader_change_notice: 'リーダー変更連絡'
     button:
       submit: '投稿'
       edit: '編集'
