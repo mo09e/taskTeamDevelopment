@@ -50,7 +50,6 @@ class TeamsController < ApplicationController
   def leadership_change
     @assign_member = User.find(params[:leader_ship])
     @team = Team.find(params[:id])
-    # @team = @assign_member.teams
     if current_user.id == @team.owner_id
       @team.update_attributes(owner_id: @assign_member.id)
       @team.save
